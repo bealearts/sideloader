@@ -1,10 +1,10 @@
 {
   "name": "sideloader",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/sideloader.js",
+  "version": "0.0.0",
+  "description": "Allow test frameworks to dynamically require (sideload) .mjs test files",
   "scripts": {
-    "test": "NODE_OPTIONS='--experimental-modules --loader ./src/sideloader.mjs' ava test"
+    "test:ava": "NODE_OPTIONS='--experimental-modules --loader ./' ava test/ava",
+    "test": "npm run test:ava"
   },
   "author": "",
   "license": "MIT",
