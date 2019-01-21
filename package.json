@@ -1,0 +1,14 @@
+{
+  "name": "sideloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/sideloader.js",
+  "scripts": {
+    "test": "NODE_OPTIONS='--experimental-modules --loader ./src/sideloader.mjs' ava test"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^1.0.1"
+  }
+}
