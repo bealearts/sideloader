@@ -1,6 +1,6 @@
 {
   "name": "sideloader",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Allow test frameworks to dynamically require (sideload) .mjs test files",
   "scripts": {
     "lint": "eslint src/**/*.*js test/**/*.*js",
