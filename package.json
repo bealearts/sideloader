@@ -3,10 +3,24 @@
   "version": "0.0.0",
   "description": "Allow test frameworks to dynamically require (sideload) .mjs test files",
   "scripts": {
+    "lint": "eslint src/**/*.*js test/**/*.*js",
     "test:ava": "NODE_OPTIONS='--experimental-modules --loader ./' ava test/ava",
-    "test": "npm run test:ava"
+    "test": "npm run lint && npm run test:ava"
   },
-  "author": "",
+  "keywords": [
+    "es",
+    "esm",
+    "test",
+    "testing"
+  ],
+  "author": {
+    "name": "David Beale",
+    "url": "http://bealearts.co.uk/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:BealeARTS/sideloader.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "ava": "^1.0.1"

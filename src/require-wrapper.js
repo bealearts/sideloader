@@ -1,29 +1,29 @@
 const Module = require('module');
-const resolve = require('path').resolve;
-const join = require('path').join;
-const dirname = require('path').dirname;
-const vm = require('vm');
-const fs = require('fs');
+const path = require('path');
 
-const originalLoader = Module._load;
+const { resolve, join, dirname } = path;
+
+const originalLoader = Module._load; // eslint-disable-line no-underscore-dangle
 
 let esmImport;
 
 module.exports = function importer(imp) {
   esmImport = imp;
-}
+};
 
 
-Module._load = function(request, parent) {
-  if (!parent) return originalLoader.apply(this, arguments);
+Module._load = function _load(request, parent) { // eslint-disable-line no-underscore-dangle
+  if (!parent) {
+    return originalLoader.apply(this, arguments); // eslint-disable-line prefer-rest-params
+  }
 
   const resolvedPath = getFullPath(request, parent.filename);
   if (resolvedPath.substr(-4) === '.mjs') {
-      const mod = load(resolvedPath);
-      return mod;
+    const mod = load(resolvedPath);
+    return mod;
   }
 
-  return originalLoader.apply(this, arguments);
+  return originalLoader.apply(this, arguments); // eslint-disable-line prefer-rest-params
 };
 
 
@@ -55,9 +55,9 @@ function getFullPath(path, calledFrom) {
 
   const localModuleName = join(dirname(calledFrom), path);
   try {
-    return Module._resolveFilename(localModuleName);
+    return Module._resolveFilename(localModuleName); // eslint-disable-line no-underscore-dangle
   } catch (e) {
-    if (isModuleNotFoundError(e)) { return localModuleName; } else { throw e; }
+    if (isModuleNotFoundError(e)) { return localModuleName; } throw e;
   }
 }
 
@@ -70,10 +70,6 @@ function isInNodePath(resolvedPath) {
   if (!resolvedPath) return false;
 
   return Module.globalPaths
-    .map((nodePath) => {
-      return resolve(process.cwd(), nodePath) + '/';
-    })
-    .some((fullNodePath) => {
-      return resolvedPath.indexOf(fullNodePath) === 0;
-    });
+    .map(nodePath => `${resolve(process.cwd(), nodePath)}/`)
+    .some(fullNodePath => resolvedPath.indexOf(fullNodePath) === 0);
 }
